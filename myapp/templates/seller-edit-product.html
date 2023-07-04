@@ -1,0 +1,90 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  </head>
+<body>
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+
+	<div class="span12">
+    <ul class="breadcrumb">
+		<li><a href="index.html">Home</a> <span class="divider">/</span></li>
+		<li class="active">Edit Product</li>
+    </ul>
+	<h3> Edit Product</h3>	
+	<div class="well">
+	{% if msg %}
+		<b style="color:blue;">{{msg}}</b>
+	{% endif %}
+	<form class="form-horizontal" method="post" action="{% url 'seller-edit-product' pk=product.pk %}" enctype="multipart/form-data">
+		{% csrf_token %}
+
+		<div class="control-group">
+			<label class="control-label" for="inputFname">Select Product Category <sup>*</sup></label>
+			<div class="controls">
+			  <select name="product_category">
+			  	
+			  	{% if product.product_category == "Camera" %}
+			  		<option>---Select Product Category---</option>
+			  		<option value="Camera" selected>Camera</option>
+			  		<option value="Accessories">Accessories</option>
+			  	{% else %}
+			  		<option>---Select Product Category---</option>
+			  		<option value="Camera">Camera</option>
+			  		<option value="Accessories" selected>Accessories</option>
+			  	{% endif %}
+			  </select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="inputFname">Product name <sup>*</sup></label>
+			<div class="controls">
+			  <input type="text" id="inputFname" value="{{product.product_name}}" name="product_name">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="inputLname">Product Price <sup>*</sup></label>
+			<div class="controls">
+			  <input type="text" id="inputLname" value="{{product.product_price}}" name="product_price"/>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="aditionalInfo">Product Description</label>
+			<div class="controls">
+			  <textarea id="aditionalInfo" cols="26" rows="3" name="product_desc">{{product.product_desc}}</textarea>
+			</div>
+		</div>
+		<div class="control-group">
+			
+			<div class="controls">
+			  <img src="{{product.product_image.url}}" width="200px"  height="200px">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="mobile">Product Image </label>
+			<div class="controls">
+			  <input type="file"  name="product_image" id="password" /> 
+			</div>
+		</div>
+	
+	<div class="control-group">
+			<div class="controls">
+				<input class="btn btn-large btn-success" type="submit" value="Update Product" />
+			</div>
+		</div>		
+	</form>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<!-- MainBody End ============================= -->
+</body>
+</html>
+{% endblock %}

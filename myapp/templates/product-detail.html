@@ -1,0 +1,67 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  </head>
+<body>
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+	<div class="span9">
+    <ul class="breadcrumb">
+    <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+    <li><a href="products.html">Products</a> <span class="divider">/</span></li>
+    <li class="active">product Details</li>
+    </ul>	
+	<div class="row">	  
+			<div id="gallery" class="span3">
+            <a href="{{product.product_image.url}}"  style="width: 500px;height: 500px;" title="Fujifilm FinePix S2950 Digital Camera">
+				<img src="{{product.product_image.url}}" style="width:100%" alt="Fujifilm FinePix S2950 Digital Camera"/>
+            </a>
+			  
+			 
+			</div>
+			<div class="span6">
+				<h3>{{product.product_name}}  </h3>
+				<small>- {{product.product_desc}}</small>
+				<hr class="soft"/>
+				<form class="form-horizontal qtyFrm">
+				  <div class="control-group">
+					<label class="control-label"><span>{{product.product_price}}</span></label>
+					<div class="controls">
+						
+						{% if wishlist_flag == True %}
+							<a href="{% url 'remove-from-wishlist' pk=product.pk %}"><button type="button" class="btn btn-large btn-danger"> Remove From Wishlist </button></a>
+						{% else %}
+							<a href="{% url 'add-to-wishlist' pk=product.pk %}"><button type="button" class="btn btn-large btn-primary"> Add To Wishlist </button></a>
+						{% endif %}
+					  
+						{% if cart_flag == True %}
+							<a href="{% url 'remove-from-cart' pk=product.pk %}"><button type="button" class="btn btn-large btn-danger"> Remove From Cart </button></a>
+						{% else %}
+							<a href="{% url 'add-to-cart' pk=product.pk %}"><button type="button" class="btn btn-large btn-primary"> Add To Cart </button></a>
+						{% endif %}
+					</div>
+				  </div>
+				</form>
+				
+				
+				<p>
+				{{product.product_desc}}
+				
+				</p>
+				
+			
+			</div>
+			
+
+	</div>
+</div>
+</div> </div>
+</div>
+<!-- MainBody End ============================= -->
+</body>
+</html>
+{% endblock %}

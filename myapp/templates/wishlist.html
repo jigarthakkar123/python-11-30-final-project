@@ -1,0 +1,44 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+  </head>
+<body>
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+
+		<div class="span9">		
+		{% if wishlists %}	
+			<h4>Wishlist Products </h4>
+		{% else %}
+			<h4>No Products In Wishlist</h4>
+		{% endif %}
+			  <ul class="thumbnails">
+			  {% for i in wishlists %}
+				<li class="span3">
+				  <div class="thumbnail">
+					<a  href="product_details.html"><img src="{{i.product.product_image.url}}" alt="" style="width:200px;height:200px;" /></a>
+					<div class="caption">
+					  <h5>{{i.product.product_name}}</h5>
+					  <p> 
+							{{i.product.product_desc}}
+					  </p>
+					 
+					  <h4 style="text-align:center"> <a class="btn" href="{% url 'product-detail' pk=i.product.pk %}">Details</a> <a class="btn btn-primary" href="#">{{i.product.product_price}}</a></h4>
+					</div>
+				  </div>
+				</li>
+				{% endfor %}
+			  </ul>	
+
+		</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+{% endblock %}

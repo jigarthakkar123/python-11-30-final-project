@@ -1,0 +1,57 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+<body>
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+
+		<div class="span9">		
+		{% if carts %}	
+			<h4>Ordered Products </h4>
+		{% else %}
+			<h4>No Products In Order Yet</h4>
+		{% endif %}
+			  <ul class="thumbnails">
+			  {% for i in carts %}
+				<li class="span4">
+				  <div class="thumbnail">
+					<a  href="product_details.html"><img src="{{i.product.product_image.url}}" alt="" style="width:200px;height:200px;" /></a>
+					<div class="caption">
+					  <h5>{{i.product.product_name}}</h5>
+					  <p> 
+							{{i.product.product_desc}}
+					  </p>
+					 	<p> 
+							Product Price {{i.product.product_price}}
+					  </p>
+					  <form name="price_change" method="post" action="{% url 'change-qty' %}">
+					  	{% csrf_token %}
+					  	<input type="hidden" name="cid" value="{{i.pk}}">
+					  	Qty : <input type="number" name="product_qty" value="{{i.product_qty}}" min="1" max="10" onchange="this.form.submit();" readonly>
+					  </form>
+					  <p> 
+							Total Price {{i.total_price}}
+					  </p>
+					  <h4 style="text-align:center"> <a class="btn" href="{% url 'product-detail' pk=i.product.pk %}">Details</a> </h4>
+					</div>
+				  </div>
+				</li>
+				{% endfor %}
+			  </ul>	
+
+		</div>
+
+		</div>
+		
+	</div>
+</div>
+
+</body>
+</html>
+{% endblock %}

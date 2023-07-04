@@ -1,0 +1,57 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  </head>
+<body>
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+
+	<div class="span9">
+    <ul class="breadcrumb">
+		<li><a href="index.html">Home</a> <span class="divider">/</span></li>
+		<li class="active">Enter OTP</li>
+    </ul>
+	<h3> Enter OTP</h3>	
+	<hr class="soft"/>
+	
+	<div class="row">
+		
+		
+		<div class="span12">
+			<div class="well">
+
+			{% if msg %}
+				<b style="color:blue;">{{msg}}</b>
+			{% endif %}
+			<form method="post" action="{% url 'verify-otp' %}">
+				{% csrf_token %}
+				<input type="hidden" name="mobile" value="{{mobile}}">
+				<input type="hidden" name="otp" value="{{otp}}">
+			  <div class="control-group">
+				<label class="control-label" for="inputEmail1">OTP</label>
+				<div class="controls">
+				  <input class="span3"  type="text" id="inputEmail1" placeholder="Enter OTP" name="uotp">
+				</div>
+			  </div>
+			  
+			  <div class="control-group">
+				<div class="controls">
+				  <button type="submit" class="btn">Verify OTP</button> 
+				</div>
+			  </div>
+			</form>
+		</div>
+		</div>
+	</div>	
+	
+</div>
+</div></div>
+</div>
+<!-- MainBody End ============================= -->
+</body>
+</html>
+{% endblock %}

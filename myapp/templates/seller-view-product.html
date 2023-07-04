@@ -1,0 +1,39 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+  </head>
+<body>
+
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+		<div class="span12">		
+			
+		<h4>My Products </h4>
+			  <ul class="thumbnails">
+			  {% for i in products %}
+				<li class="span3">
+				  <div class="thumbnail">
+					<a  href="product_details.html"><img src="{{i.product_image.url}}" alt="" style="height:250px;width:400px;" /></a>
+					<div class="caption">
+					  <h5>{{i.product_name}}</h5>
+				
+					 
+					  <h4 style="text-align:center"> <a class="btn" href="{% url 'seller-product-detail' pk=i.pk %}">Details</a> <a class="btn btn-primary" href="#">{{i.product_price}}</a></h4>
+					</div>
+				  </div>
+				</li>
+				{% endfor %}
+			  </ul>	
+
+		</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+{% endblock %}
